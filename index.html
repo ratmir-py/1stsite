@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Was soll ich tun?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #faf3e0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        select, button {
+            font-size: 16px;
+            padding: 12px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #generateActivity {
+            display: none;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        #startButton {
+            background-color: #ff9800;
+            color: white;
+        }
+        #footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #555;
+            font-size: 14px;
+        }
+        #footer p {
+            margin: 5px 0;
+        }
+        #footer b {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 id="title">Was soll ich tun?</h1>
+</header>
+
+<div class="container">
+    <div>
+        <label for="languageSelect">Wähle eine Sprache: </label>
+        <select id="languageSelect">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+>
+        </select>
+    </div>
+
+   <button id="startButton">click</button>
+    <button id="generateActivity">Generate an Activity</button>
+
+    <p id="activity"></p>
+</div>
+
+<div id="footer">
+    <p id="footer-text">try again!<br>Website von <b>ratmir</b>.</p>
+</div>
+
+<script>
+    const activities = {
+        de: {
+            title: "Was soll ich tun?",
+            activities: [
+                "Gehe spazieren und höre dabei Musik.",
+                "Schau dir einen Film auf Netflix an.",
+                "Mache ein kreatives DIY-Projekt.",
+                "Ruf einen Freund an und unterhalte dich!",
+                "Probiere ein neues Rezept aus.",
+                "Lese ein Buch oder einen Artikel.",
+                "Spiele ein Brettspiel mit deiner Familie.",
+                "Gehe joggen und genieße die Natur.",
+                "Schreibe ein Tagebuch.",
+                "Lerne ein neues Instrument.",
+                "Mache Yoga oder meditiere.",
+                "Fahre Fahrrad in einem Park.",
+                "Probiere eine neue Sportart aus.",
+                "Backe einen Kuchen.",
+                "Mache eine Fotosession mit Freunden.",
+                "Plane deinen nächsten Urlaub.",
+                "Besuche ein Museum oder eine Ausstellung.",
+                "Schreibe einen Brief an jemanden, den du lange nicht gesehen hast.",
+                "Erstelle einen YouTube-Channel und lade ein Video hoch.",
+                "Lese ein interessantes Artikel online.",
+                "Koche ein internationales Gericht.",
+                "Schreibe eine Geschichte oder ein Gedicht.",
+                "Mache einen Spaziergang am See.",
+                "Mache eine Liste deiner Lieblingslieder.",
+                "Gehe in einen Park und beobachte die Tiere.",
+                "Spiele ein Kartenspiel mit der Familie.",
+                "Erstelle ein Moodboard mit deinen Zielen.",
+                "Lerne einen neuen Tanz.",
+                "Geh in ein Café und genieße einen Drink.",
+                "Mache einen DIY-Schmuck.",
+                "Probiere ein neues Fitnessprogramm.",
+                "Besuche einen Freund oder ein Familienmitglied.",
+                "Mach einen Ausflug ins Grüne.",
+                "Erstelle ein Vision Board für deine Zukunft.",
+                "Starte ein kleines Projekt, das du schon lange machen wolltest.",
+                "Höre einen Podcast zu einem Thema, das dich interessiert.",
+                "Probiere Meditation oder Atemübungen.",
+                "Mache ein Puzzle.",
+                "Erstelle eine Bucket List für dein Leben.",
+                "Lerne etwas Neues auf einer Online-Plattform.",
+                "Mache einen Spaziergang und schau dir die Architektur der Häuser an.",
+                "Besuche eine Bibliothek und leih dir ein Buch aus.",
+                "Verbringe Zeit mit deinem Haustier.",
+                "Geh zu einem Flohmarkt und finde etwas Cooles.",
+                "Lerne eine neue Sprache auf Duolingo.",
+                "Mache einen Roadtrip mit Freunden.",
+                "Lese ein inspirierendes Zitat und reflektiere darüber.",
+                "Schreibe eine Liste mit deinen Zielen für die nächsten 5 Jahre.",
+                "Mache ein kreatives Kunstprojekt.",
+                "Verbringe Zeit in der Natur und genieße die Stille."
+            ],
+            buttonText: "Aktivität generieren",
+            footerText: "Mehr Spaß: Versuch es öfter!<br>Website von <b>ratmir</b>."
+        },
+        en: {
+            title: "What should I do?",
+            activities: [
+                "Go for a walk and listen to music.",
+                "Watch a movie on Netflix.",
+                "Start a creative DIY project.",
+                "Call a friend and chat!",
+                "Try a new recipe.",
+                "Read a book or article.",
+                "Play a board game with your family.",
+                "Go jogging and enjoy nature.",
+                "Write in a journal.",
+                "Learn a new instrument.",
+                "Do yoga or meditate.",
+                "Ride a bike in a park.",
+                "Try a new sport.",
+                "Bake a cake.",
+                "Have a photo session with friends.",
+                "Plan your next vacation.",
+                "Visit a museum or exhibit.",
+                "Write a letter to someone you haven’t seen in a while.",
+                "Start a YouTube channel and upload a video.",
+                "Read an interesting article online.",
+                "Cook an international dish.",
+                "Write a story or poem.",
+                "Take a walk by the lake.",
+                "Make a list of your favorite songs.",
+                "Go to a park and watch the animals.",
+                "Play a card game with your family.",
+                "Create a moodboard with your goals.",
+                "Learn a new dance.",
+                "Go to a café and enjoy a drink.",
+                "Make DIY jewelry.",
+                "Try a new fitness program.",
+                "Visit a friend or family member.",
+                "Take a trip to the countryside.",
+                "Create a vision board for your future.",
+                "Start a small project you’ve been wanting to do.",
+                "Listen to a podcast about something you’re interested in.",
+                "Try meditation or breathing exercises.",
+                "Do a puzzle.",
+                "Create a bucket list for your life.",
+                "Learn something new on an online platform.",
+                "Take a walk and observe the architecture of the houses.",
+                "Visit a library and borrow a book.",
+                "Spend time with your pet.",
+                "Go to a flea market and find something cool.",
+                "Learn a new language on Duolingo.",
+                "Go on a road trip with friends.",
+                "Read an inspiring quote and reflect on it.",
+                "Write a list of your goals for the next 5 years.",
+                "Do a creative art project.",
+                "Spend time in nature and enjoy the silence."
+            ],
+            buttonText: "Generate Activity",
+            footerText: "More fun: Try again!<br>Website by <b>ratmir</b>."
+        },
+        // Du kannst hier andere Sprachen hinzufügen, wie z.B. Russisch, Französisch, etc.
+    };
+
+    const activityDisplay = document.getElementById("activity");
+    const languageSelect = document.getElementById("languageSelect");
+    const startButton = document.getElementById("startButton");
+    const generateButton = document.getElementById("generateActivity");
+    const footerText = document.getElementById("footer-text");
+
+    let selectedLanguage = "de"; // Standardmäßig Deutsch
+
+    // Funktion zum Abrufen der Aktivitäten basierend auf der Sprache
+    function getRandomActivity(language) {
+        const langContent = activities[language];
+        return langContent.activities[Math.floor(Math.random() * langContent.activities.length)];
+    }
+
+    // Funktionen zum Ändern der Sprache
+    function updateLanguage(language) {
+        const langContent = activities[language];
+        document.getElementById("title").textContent = langContent.title;
+        generateButton.textContent = langContent.buttonText;
+        footerText.innerHTML = langContent.footerText;
+    }
+
+    // Wenn die Sprache gewechselt wird
+    languageSelect.addEventListener("change", function() {
+        selectedLanguage = languageSelect.value;
+        updateLanguage(selectedLanguage);
+    });
+
+    // Wenn der Start-Button geklickt wird
+    startButton.addEventListener("click", function() {
+        generateButton.style.display = "inline"; // Generieren Button anzeigen
+        activityDisplay.textContent = ""; // Alte Aktivität löschen
+    });
+
+    // Wenn der Generieren-Button geklickt wird
+    generateButton.addEventListener("click", function() {
+        const activity = getRandomActivity(selectedLanguage);
+        activityDisplay.textContent = activity;
+    });
+
+    // Initialisieren mit der Standardsprache
+    updateLanguage(selectedLanguage);
+</script>
+
+</body>
+</html>
